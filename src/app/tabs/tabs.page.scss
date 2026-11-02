@@ -1,0 +1,60 @@
+/* Tab Bar em estilo Dock Flutuante Glassmorphism */
+ion-tab-bar.orbit-tab-bar {
+  --background: rgba(12, 14, 20, 0.75) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 24px;
+  
+  /* Posicionamento flutuante elegante com respiros da Apple */
+  margin: 0 16px 20px 16px;
+  height: 64px;
+  box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.5), 
+              0 0 0 1px rgba(255, 255, 255, 0.05);
+  
+  /* Remove a borda padrão do Ionic */
+  contain: none;
+}
+
+/* Estilização dos Botões da Tab */
+ion-tab-button {
+  --background: transparent;
+  --color: #6b7280;
+  --color-selected: #ffffff;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 6px 0;
+  --display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ion-icon {
+    font-size: 30px;
+    margin: 20px 10px 0;
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  ion-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: -0.1px;
+  }
+
+  /* Estado Selecionado (Efeito Neon Glow) */
+  &.tab-selected {
+    ion-icon {
+      transform: translateY(-2px) scale(1.1);
+      color: #3b82f6;
+      filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
+    }
+
+    ion-label {
+      color: #ffffff;
+      font-weight: 600;
+    }
+  }
+
+  /* Feedback ao tocar/passar o mouse */
+  &:active {
+    opacity: 0.8;
+  }
+}

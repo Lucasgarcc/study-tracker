@@ -1,0 +1,56 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar style="--background: #090a0f; --color: #f3f4f6;">
+    <ion-title class="ion-padding-start">Orbit Hub</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" style="--background: #090a0f;">
+  <ion-header collapse="condense" class="ion-no-border">
+    <ion-toolbar style="--background: #090a0f; --color: #f3f4f6;">
+      <ion-title size="large">Orbit Hub</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Container Geral com espaçamento Apple (max-width e respiros) -->
+  <div class="orbit-home-container">
+    
+    <!-- Cabeçalho de Boas-vindas -->
+    <div class="welcome-section">
+      <span class="badge-subtitle">PAINEL DE ESTUDOS</span>
+      <h1 class="welcome-title">Seus Tópicos Ativos</h1>
+      <p class="welcome-desc">Selecione um módulo abaixo para continuar sua jornada de aprendizado.</p>
+    </div>
+
+    <!-- Grid de Gadgets (Estilo Grade com Spotlight Glow) -->
+    <div class="orbit-grid">
+      
+      <!-- Loop dos Tópicos vindos do NgRx -->
+      <div *ngFor="let topic of activeTopics$ | async" 
+           class="orbit-gadget-card" 
+           (click)="openTopicDetail(topic.id)">
+        
+        <!-- Ícone / Logo do Tópico com Glow interno -->
+        <div class="gadget-icon-wrapper">
+          <ion-icon [name]="getCategoryIcon(topic.category)" class="gadget-icon"></ion-icon>
+        </div>
+
+        <!-- Informações do Tópico -->
+        <div class="gadget-info">
+          <span class="gadget-category">{{ topic.category }}</span>
+          <h3 class="gadget-title">{{ topic.title }}</h3>
+        </div>
+
+        <!-- Progresso em Barra Minimalista -->
+        <div class="gadget-footer">
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" [style.width.%]="topic.progress"></div>
+          </div>
+          <span class="progress-text">{{ topic.progress }}%</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</ion-content>

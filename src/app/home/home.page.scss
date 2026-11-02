@@ -1,0 +1,142 @@
+.orbit-home-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 16px 48px 16px;
+}
+
+.welcome-section {
+  margin-bottom: 32px;
+  text-align: left;
+
+  .badge-subtitle {
+    color: #3b82f6;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .welcome-title {
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin: 0 0 8px 0;
+  }
+
+  .welcome-desc {
+    color: #9ca3af;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+}
+
+/* Grid estilo Apple / Dashboard moderno */
+.orbit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Card Gadget com Glassmorphism e Efeito Spotlight */
+.orbit-gadget-card {
+  background: rgba(18, 20, 28, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+  /* Estado Hover com Glow Neon (Inspirado na referência) */
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba(59, 130, 246, 0.5);
+    background: rgba(24, 28, 40, 0.85);
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.25), 0 12px 40px rgba(0, 0, 0, 0.5);
+
+    .gadget-icon-wrapper {
+      background: linear-gradient(135deg, #3b82f6 0%, #ec4899 100%);
+      box-shadow: 0 0 15px rgba(236, 72, 153, 0.5);
+      color: #fff;
+    }
+  }
+
+  .gadget-icon-wrapper {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+
+    .gadget-icon {
+      font-size: 22px;
+    }
+  }
+
+  .gadget-info {
+    margin-bottom: 20px;
+
+    .gadget-category {
+      color: #6b7280;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .gadget-title {
+      color: #f3f4f6;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+      margin: 0;
+      line-height: 1.4;
+    }
+  }
+
+  .gadget-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .progress-bar-bg {
+      flex: 1;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 3px;
+      overflow: hidden;
+
+      .progress-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #3b82f6, #ec4899);
+        border-radius: 3px;
+        transition: width 0.4s ease;
+      }
+    }
+
+    .progress-text {
+      color: #9ca3af;
+      font-size: 0.75rem;
+      font-weight: 600;
+      min-width: 32px;
+      text-align: right;
+    }
+  }
+}

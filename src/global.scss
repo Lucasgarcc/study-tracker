@@ -1,0 +1,111 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+
+:root {
+    --ion-background-color: #090a0f !important;
+    --ion-background-color-rgb: 9, 10, 15 !important;
+    
+    --ion-text-color: #f3f4f6 !important;
+    --ion-text-color-rgb: 243, 244, 246 !important;
+
+    /* Cores principais com gradientes e tons neon */
+    --ion-color-primary:  #733bf6;
+    --ion-color-primary-rgb: 59, 130, 246;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #8633d9;
+    --ion-color-primary-tint: #a34ef7;
+
+    --ion-color-step-50: #12141c;
+    --ion-color-step-100: #1a1d29;
+    --ion-color-step-150: #222636;
+    --ion-color-step-200: #2a2f42;
+
+    /* Estilização padrão para toolbars e headers */
+    --ion-toolbar-background: #090a0f !important;
+    --ion-toolbar-color: #f3f4f6 !important;
+    --ion-toolbar-border-color: rgba(255, 255, 255, 0.08) !important;
+
+    /* Estilização da barra de abas inferior (Tabs) */
+    --ion-tab-bar-background: #0c0e14 !important;
+    --ion-tab-bar-border-color: rgba(255, 255, 255, 0.06) !important;
+    --ion-tab-bar-color: #6b7280;
+    --ion-tab-bar-color-selected: #3b82f6;
+}
+
+/* Corpo da aplicação com fundo escuro futurista */
+ion-content {
+  --background: var(--orbit-bg-base) !important;
+  color: var(--orbit-text-main);
+}
+
+.orbit-card {
+  background: var(--orbit-card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--orbit-card-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: all 0.3s ease;
+}
+
+.orbit-card:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+}
+
+/* Customização dos ion-item e ion-input para o padrão Orbit */
+ion-item.orbit-input-item {
+  --background: rgba(255, 255, 255, 0.03);
+  --border-radius: 12px;
+  border: 1px solid var(--orbit-card-border);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  --highlight-color-focused: #733bf6;
+}
+
+ion-item.orbit-input-item:focus-within {
+  border-color:  #733bf6;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+}
+
+ion-input, ion-select {
+  --color: #ffffff !important;
+  --placeholder-color: #6b7280 !important;
+}
