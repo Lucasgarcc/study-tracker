@@ -1,3 +1,24 @@
-<p>
-  topic-detail works!
-</p>
+<ion-header class="topic-detail-header">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button
+          class="topic-back-button"
+          defaultHref="/tabs/home"
+          icon="chevron-back-outline"
+          text=""
+          aria-label="Voltar para os tópicos">
+        </ion-back-button>
+      </ion-buttons>
+      <ion-title>Detalhes do tópico</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    @if (topic$ | async; as topic) {
+        <h1>{{ topic.title }}</h1>
+        <p>{{ topic.category }}</p>
+        <p>Progresso: {{ topic.progress }}%</p>
+    } @else {
+        <p>Tópico não encontrado.</p>
+    }
+</ion-content>

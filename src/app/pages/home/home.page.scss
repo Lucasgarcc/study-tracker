@@ -1,0 +1,147 @@
+.orbit-home-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 16px 48px 16px;
+}
+
+.welcome-section {
+  margin-bottom: 32px;
+  text-align: left;
+
+  .badge-subtitle {
+    color: var(--orbit-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .welcome-title {
+    color: var(--orbit-text-main);
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin: 0 0 8px 0;
+  }
+
+  .welcome-desc {
+    color: var(--orbit-text-muted);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+}
+
+/* Grid estilo Apple / Dashboard moderno */
+.orbit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Card Gadget com Glassmorphism e Efeito Spotlight */
+.orbit-gadget-card {
+    &:focus-visible {
+        outline: 2px solid var(--orbit-accent);
+        outline-offset: 3px;
+    }
+    background: var(--orbit-card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--orbit-card-border);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--orbit-shadow-1);
+
+    /* Estado Hover com Glow Neon (Inspirado na referência) */
+    &:hover {
+        transform: translateY(-4px);
+        border-color: rgba(118, 87, 201, 0.42);
+        background: var(--orbit-bg-surface);
+        box-shadow: 0 0 30px rgba(118, 87, 201, 0.16), var(--orbit-shadow-2);
+
+        .gadget-icon-wrapper {
+        background: linear-gradient(135deg, var(--orbit-primary) 0%, var(--orbit-accent) 100%);
+        box-shadow: 0 0 15px rgba(118, 87, 201, 0.28);
+        color: var(--orbit-primary-contrast);
+        }
+    }
+
+    .gadget-icon-wrapper {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: var(--orbit-bg-surface-variant);
+        border: 1px solid var(--orbit-card-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--orbit-text-muted);
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+
+        .gadget-icon {
+        font-size: 22px;
+        }
+    }
+
+    .gadget-info {
+        margin-bottom: 20px;
+
+        .gadget-category {
+        color: var(--orbit-text-muted);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: block;
+        margin-bottom: 4px;
+        }
+    
+        .gadget-title {
+            color: var(--orbit-text-main);
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            margin: 0;
+            line-height: 1.4;
+            text-overflow: ellipsis;
+        }
+    }
+
+    .gadget-footer {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .progress-bar-bg {
+        flex: 1;
+        height: 6px;
+        background: var(--orbit-bg-surface-variant);
+        border-radius: 3px;
+        overflow: hidden;
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--orbit-primary), var(--orbit-accent));
+            border-radius: 3px;
+            transition: width 0.4s ease;
+        }
+        }
+
+        .progress-text {
+        color: var(--orbit-text-muted);
+        font-size: 0.75rem;
+        font-weight: 600;
+        min-width: 32px;
+        text-align: right;
+        }
+    }
+}

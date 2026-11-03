@@ -1,4 +1,4 @@
-<ion-header [translucent]="true" class="ion-no-border">
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-title>Preferências</ion-title>
   </ion-toolbar>
@@ -37,7 +37,7 @@
         <ion-item lines="none" class="settings-item">
           <ion-icon slot="start" name="text-outline" aria-hidden="true"></ion-icon>
           <ion-label><h3>Tamanho do texto</h3><p>Ajuste a leitura sem alterar o conteúdo.</p></ion-label>
-          <ion-select slot="end" [(ngModel)]="fontSize" (ngModelChange)="setFontSize($event)" interface="popover" aria-label="Tamanho do texto">
+          <ion-select slot="end" class="font-size-select" [(ngModel)]="fontSize" (ngModelChange)="setFontSize($event)" interface="popover" [interfaceOptions]="{ cssClass: 'orbit-font-size-popover' }" aria-label="Tamanho do texto">
             <ion-select-option value="small">Pequeno</ion-select-option>
             <ion-select-option value="medium">Padrão</ion-select-option>
             <ion-select-option value="large">Grande</ion-select-option>

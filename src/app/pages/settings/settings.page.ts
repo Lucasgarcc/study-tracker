@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Host, HostBinding, Inject, Renderer2 } from '@angular/core';
+import { Component, HostBinding, Inject, OnInit, Renderer2 } from '@angular/core';
 
 /**
  *  Tipage for the settings preferences stored in localStorage
@@ -22,28 +22,45 @@ interface SettingsPreferences {
   styleUrls: ['settings.page.scss'],
   standalone: false,
 })
-export class SettingsPage {
+export class SettingsPage implements OnInit {
 
     readonly appVersion = '0.0.1';
-    readonly storageKey = 'study-tracker-preferences';
+    readonly storageKey = 'study-tracker-preferences'; 
+
+    private readonly fontScale  = { small: '0.9', medium: '1', large: '1.12' }
+    private readonly root: HTMLElement;
+
     theme: ThemePreference = 'system';
     fontSize: FontSizePreference = 'medium';
     reducedMotion = false;
-    private readonly fontScale  = { small: '0.9', medium: '1', large: '1.12' }
-   
-    constructor(
-        private readonly Renderer: Renderer2,
-        @Inject(DOCUMENT) private readonly Document: Document
-    ) {};
 
-    ngOnInit(): void { this.restorePreferences(); }
+    /**
+     * 
+     * @param renderer 
+     * @param document 
+     */
+    constructor(
+        private readonly renderer: Renderer2,
+        @Inject(DOCUMENT) private readonly document: Document
+    ) {
+        this.root = document.documentElement;
+    }
+
+    /**
+     * 
+     */
+    ngOnInit(): void { 
+        this.restorePreferences();
+    };  
 
     /**
      * bind the font scale to the root element based on the selected font size
      */
     @HostBinding('style.--orbit-font-scale')
     get orbitFontScale(): string {
+
         return this.fontScale[this.fontSize];
+
     }
 
     /**
@@ -51,7 +68,9 @@ export class SettingsPage {
      */
     @HostBinding('class.reduce-motion')
     get reduceMotionClass(): boolean {
+
         return this.reducedMotion;
+
     }
 
     /**
@@ -61,11 +80,11 @@ export class SettingsPage {
     setTheme(theme: ThemePreference): void {
         this.theme = theme;
 
-        if (theme === 'system') {
-            this.Document.documentElement.removeAttribute('data-theme');
-        } else {
-            this.Document.documentElement.setAttribute('data-theme', theme);
-        }
+        theme === 'system' 
+        ? this.renderer.removeAttribute(this.root, 'data-theme')
+        : this.renderer.setAttribute(this.root, 'data-theme', theme);
+        // Renderer2 receives the target element, attribute name, and value.
+    
         this.savePreferences();
     }
 
@@ -74,7 +93,13 @@ export class SettingsPage {
      * @param value 
      */
     onThemeChange(value: string | number | undefined): void {
-        if (value === 'light' || value === 'dark' || value === 'system') this.setTheme(value);
+    
+        if (value === 'light' 
+            || value === 'dark' 
+            || value === 'system'
+        ) 
+        this.setTheme(value);
+    
     }
 
     /**
@@ -82,8 +107,10 @@ export class SettingsPage {
      * @param fontSize 
      */
     setFontSize(fontSize: FontSizePreference): void {
+    
         this.fontSize = fontSize;
         this.savePreferences();
+    
     }
 
     /**
@@ -91,21 +118,25 @@ export class SettingsPage {
      * @param value 
      */
     setReducedMotion(value: boolean): void {
+
         this.reducedMotion = value;
         this.savePreferences();
+    
     }
 
     /**
      * 
      */
     resetPreferences(): void {
+
         this.theme = 'system';
         this.fontSize = 'medium';
         this.reducedMotion = false;
-        document.documentElement.removeAttribute('data-theme');
-        document.documentElement.style.setProperty('--orbit-font-scale', '1');
-        document.documentElement.classList.remove('reduce-motion');
+        this.renderer.removeAttribute(this.root, 'data-theme');
+
+        // HostBinding updates the font scale and motion class from the values above.
         localStorage.removeItem(this.storageKey);
+    
     }
 
     /**
@@ -113,26 +144,35 @@ export class SettingsPage {
      * @returns 
      */
     private restorePreferences(): void {
+    
         const stored = localStorage.getItem(this.storageKey);
+    
         if (!stored) return;
+    
         try {
-        const preferences = JSON.parse(stored) as Partial<SettingsPreferences>;
-        this.theme = preferences.theme ?? 'system';
-        this.fontSize = preferences.fontSize ?? 'medium';
-        this.reducedMotion = preferences.reducedMotion ?? false;
-        this.setTheme(this.theme);
-        this.setFontSize(this.fontSize);
-        this.setReducedMotion(this.reducedMotion);
-        } catch { localStorage.removeItem(this.storageKey); }
+            const preferences = JSON.parse(stored) as Partial<SettingsPreferences>;
+            this.theme = preferences.theme ?? 'system';
+            this.fontSize = preferences.fontSize ?? 'medium';
+            this.reducedMotion = preferences.reducedMotion ?? false;
+            this.setTheme(this.theme);
+            this.setFontSize(this.fontSize);
+            this.setReducedMotion(this.reducedMotion);
+        } catch {
+            localStorage.removeItem(this.storageKey);
+        }
+    
     }
 
     /**
      * 
      */
     private savePreferences(): void {
+    
         localStorage.setItem(this.storageKey, JSON.stringify({
-        theme: this.theme, fontSize: this.fontSize, reducedMotion: this.reducedMotion
+
+            theme: this.theme, fontSize: this.fontSize, reducedMotion: this.reducedMotion
         } satisfies SettingsPreferences));
+    
     }
 
 }

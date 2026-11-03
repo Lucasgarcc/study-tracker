@@ -1,12 +1,12 @@
-<ion-header [translucent]="true" class="ion-no-border">
-  <ion-toolbar style="--background: var(--orbit-chrome-gradient); --color: var(--orbit-text-main); --border-color: transparent;">
+<ion-header class="ion-no-border">
+  <ion-toolbar>
     <ion-title class="ion-padding-start">Área de Estudos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding" style="--background: var(--orbit-bg-effect);">
   <ion-header collapse="condense" class="ion-no-border">
-    <ion-toolbar style="--background: var(--orbit-chrome-gradient); --color: var(--orbit-text-main); --border-color: transparent;">
+    <ion-toolbar>
       <ion-title size="large">Área de Estudos</ion-title>
     </ion-toolbar>
   </ion-header>
@@ -44,23 +44,26 @@
         </ion-item>
 
         <!-- Select com respiro de 24px antes do botão de ação principal -->
-        <ion-item class="orbit-input-item" lines="none" style="--background: var(--orbit-bg-surface-variant); border: 1px solid var(--orbit-card-border); border-radius: 14px; margin-bottom: 24px; --padding-start: 16px; --padding-end: 16px; --padding-top: 8px; --padding-bottom: 8px;">
+        <ion-item class="orbit-input-item" lines="none" style="--background: var(--orbit-bg-surface-variant); border: 1px solid var(--orbit-card-border); border-radius: 14px; margin-bottom: 24px; --padding-start: 12px; --padding-end: 0px; --padding-top: 12px; --padding-bottom: 12px;">
           <ion-select 
             label="Categoria" 
             label-placement="stacked" 
             placeholder="Selecione a categoria" 
             [(ngModel)]="newCategory" 
             name="category"
+            interface="popover"
+            [interfaceOptions]="{ cssClass: 'orbit-category-popover', header: 'Categoria', size: 'cover', showBackdrop: true }"
             style="--color: var(--orbit-text-main); --placeholder-color: var(--orbit-text-muted);">
             <ion-select-option value="Frontend">Frontend</ion-select-option>
             <ion-select-option value="Architecture">Arquitetura</ion-select-option>
             <ion-select-option value="Reactive">Reativo / RxJS</ion-select-option>
             <ion-select-option value="Backend">Backend</ion-select-option>
+            <ion-select-option value="English">English</ion-select-option>
           </ion-select>
         </ion-item>
 
         <!-- Botão com altura ergonômica (50px) -->
-        <ion-button expand="block" type="submit" style="--background: linear-gradient(135deg, var(--orbit-button-start) 0%, var(--orbit-accent) 100%); --border-radius: 14px; height: 50px; font-weight: 600; font-size: 1rem; text-transform: none; box-shadow: 0 4px 20px rgba(95, 141, 255, 0.24);">
+        <ion-button expand="block" type="submit" class="topic-submit-button">
           <ion-icon name="add-outline" slot="start" style="font-size: 20px; margin-right: 8px;"></ion-icon>
           Cadastrar Tópico
         </ion-button>
@@ -69,24 +72,27 @@
 
     <!-- Seção: Lista de Tópicos Cadastrados com hierarquia clara -->
     <div>
-      <h3 class="topic-list-title">
-        Tópicos Cadastrados
-      </h3>
-
-      <ion-list lines="none" style="background: transparent; padding: 0;">
-        <ion-item *ngFor="let topic of topics$ | async" class="orbit-card topic-card" style="--background: var(--orbit-topic-card-bg); --color: var(--orbit-text-main); background: var(--orbit-topic-card-bg) !important; backdrop-filter: blur(16px); border: 1px solid var(--orbit-topic-card-border); border-radius: 14px; margin-bottom: 12px; --padding-start: 16px; --padding-end: 16px; --padding-top: 12px; --padding-bottom: 12px;">
-          <ion-label style="margin: 6px 0;">
-            <h2 style="color: var(--orbit-text-main); font-weight: 600; font-size: 1.05rem; margin-bottom: 6px; letter-spacing: -0.2px;">{{ topic.title }}</h2>
-            <p style="color: var(--orbit-text-muted); font-size: 0.875rem;">
-              <ion-text color="primary" style="font-weight: 500;">[{{ topic.category }}]</ion-text> • Progresso: {{ topic.progress }}%
-            </p>
-          </ion-label>
-          
-          <ion-button fill="clear" color="primary" slot="end" (click)="deleteTopic(topic.id)" aria-label="Remover tópico" style="margin-left: 8px;">
-            <ion-icon name="remove-circle-outline" slot="icon-only" style="font-size: 20px;"></ion-icon>
-          </ion-button>
-        </ion-item>
-      </ion-list>
+        <h3 class="topic-list-title">
+            Tópicos Cadastrados
+        </h3>
+        <ion-list lines="none" style="background: transparent; padding: 0;">
+            <ion-item *ngFor="let topic of topics$ | async" 
+            (click)="openTopicDetail(topic.id)"
+            [button]="true"
+            class="orbit-card topic-card" style="--background: var(--orbit-topic-card-bg); --color: var(--orbit-text-main); background: var(--orbit-topic-card-bg) !important; backdrop-filter: blur(16px); border: 1px solid var(--orbit-topic-card-border); border-radius: 14px; margin-bottom: 12px; --padding-start: 16px; --padding-end: 16px; --padding-top: 12px; --padding-bottom: 12px;">
+                <ion-label style="margin: 6px 0;">
+                    <h2 style="color: var(--orbit-text-main); font-weight: 600; font-size: 1.05rem; margin-bottom: 6px; letter-spacing: -0.2px;">{{ topic.title }}</h2>
+                    <div class="topic-metadata">
+                    <span class="topic-category-badge">{{ topic.category }}</span>
+                    <span class="topic-progress">Progresso: {{ topic.progress }}%</span>
+                    </div>
+                </ion-label>
+                
+                <ion-button fill="clear" color="primary" slot="end" (click)="$event.stopPropagation(); deleteTopic(topic.id)" aria-label="Remover tópico" style="margin-left: 8px;">
+                    <ion-icon name="remove-circle-outline" slot="icon-only" style="font-size: 20px;"></ion-icon>
+                </ion-button>
+            </ion-item>
+        </ion-list>
     </div>
 
   </div>
