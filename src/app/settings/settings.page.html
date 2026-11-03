@@ -1,17 +1,73 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title>Preferências</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-title size="large">Preferências</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <main class="settings-page">
+    <section class="settings-intro">
+      <span class="eyebrow">PERSONALIZAÇÃO</span>
+      <h1>Do seu jeito</h1>
+      <p>Ajuste a aparência e o conforto da sua experiência de estudos.</p>
+    </section>
+
+    <section class="settings-section" aria-labelledby="appearance-title">
+      <h2 id="appearance-title">Aparência</h2>
+      <ion-list class="settings-list">
+        <div class="settings-item theme-settings-item" role="group" aria-labelledby="theme-title">
+          <ion-icon name="contrast-outline" aria-hidden="true"></ion-icon>
+          <ion-label>
+            <h3 id="theme-title">Tema</h3>
+            <p>Escolha como o aplicativo deve aparecer.</p>
+          </ion-label>
+          <ion-segment [value]="theme" (ionChange)="onThemeChange($event.detail.value)" aria-label="Tema da aplicação">
+            <ion-segment-button value="system"><ion-label>Sistema</ion-label></ion-segment-button>
+            <ion-segment-button value="light"><ion-label>Claro</ion-label></ion-segment-button>
+            <ion-segment-button value="dark"><ion-label>Escuro</ion-label></ion-segment-button>
+          </ion-segment>
+        </div>
+
+        <ion-item lines="none" class="settings-item">
+          <ion-icon slot="start" name="text-outline" aria-hidden="true"></ion-icon>
+          <ion-label><h3>Tamanho do texto</h3><p>Ajuste a leitura sem alterar o conteúdo.</p></ion-label>
+          <ion-select slot="end" [(ngModel)]="fontSize" (ngModelChange)="setFontSize($event)" interface="popover" aria-label="Tamanho do texto">
+            <ion-select-option value="small">Pequeno</ion-select-option>
+            <ion-select-option value="medium">Padrão</ion-select-option>
+            <ion-select-option value="large">Grande</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </section>
+
+    <section class="settings-section" aria-labelledby="accessibility-title">
+      <h2 id="accessibility-title">Acessibilidade</h2>
+      <ion-list class="settings-list">
+        <ion-item lines="none" class="settings-item">
+          <ion-icon slot="start" name="play-skip-forward-outline" aria-hidden="true"></ion-icon>
+          <ion-label><h3>Reduzir movimento</h3><p>Minimize transições e animações da interface.</p></ion-label>
+          <ion-toggle [checked]="reducedMotion" (ionChange)="setReducedMotion($event.detail.checked)" slot="end" aria-label="Reduzir movimento"></ion-toggle>
+        </ion-item>
+      </ion-list>
+    </section>
+
+    <section class="settings-section" aria-labelledby="about-title">
+      <h2 id="about-title">Sobre o aplicativo</h2>
+      <ion-list class="settings-list">
+        <ion-item lines="none" class="settings-item version-item">
+          <ion-icon slot="start" name="information-circle-outline" aria-hidden="true"></ion-icon>
+          <ion-label><h3>Study Tracker</h3><p>Organize seus estudos e acompanhe seu progresso.</p></ion-label>
+          <ion-note slot="end">v{{ appVersion }}</ion-note>
+        </ion-item>
+      </ion-list>
+    </section>
+
+    <ion-button fill="clear" color="medium" class="reset-button" (click)="resetPreferences()">Restaurar preferências</ion-button>
+  </main>
 </ion-content>

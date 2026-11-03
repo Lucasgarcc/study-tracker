@@ -1,2 +1,150 @@
-// For information on how to create your own theme, please see:
-// http://ionicframework.com/docs/theming/
+:root {
+  --orbit-primary: #6d52c7;
+  --orbit-primary-hover: #5d44b4;
+  --orbit-primary-contrast: #ffffff;
+  --orbit-secondary: #777184;
+  --orbit-accent: #9a7cf2;
+  --orbit-neon-blue: #5f8dff;
+  --orbit-chrome-accent: #6d52c7;
+  --orbit-button-start: #6d52c7;
+  --orbit-segment-checked: #6d52c7;
+  --orbit-success: #34c759;
+  --orbit-warning: #ff9f0a;
+  --orbit-danger: #ff453a;
+  --orbit-bg-base: #f8f7fb;
+  --orbit-bg-effect: radial-gradient(ellipse 68% 40% at 50% 108%, rgba(154, 124, 242, 0.1), transparent 72%), var(--orbit-bg-base);
+  --orbit-bg-surface: #ffffff;
+  --orbit-bg-surface-variant: #f0edf7;
+  --orbit-chrome-bg: rgba(255, 255, 255, 0.84);
+  --orbit-chrome-border: rgba(109, 82, 199, 0.14);
+  --orbit-chrome-gradient: var(--orbit-chrome-bg);
+  --orbit-topic-card-bg: #f1edfc;
+  --orbit-topic-card-border: rgba(109, 82, 199, 0.18);
+  --orbit-text-main: #272331;
+  --orbit-text-muted: #756f80;
+  --orbit-divider: rgba(39, 35, 49, 0.1);
+  --orbit-card-bg: rgba(255, 255, 255, 0.92);
+  --orbit-card-border: rgba(39, 35, 49, 0.09);
+
+  --orbit-space-1: 4px;
+  --orbit-space-2: 8px;
+  --orbit-space-3: 12px;
+  --orbit-space-4: 16px;
+  --orbit-space-5: 20px;
+  --orbit-space-6: 24px;
+  --orbit-space-7: 32px;
+  --orbit-space-8: 48px;
+  --orbit-radius-sm: 8px;
+  --orbit-radius-md: 12px;
+  --orbit-radius-lg: 16px;
+  --orbit-radius-xl: 24px;
+  --orbit-shadow-1: 0 1px 3px rgba(29, 27, 32, 0.12), 0 1px 2px rgba(29, 27, 32, 0.08);
+  --orbit-shadow-2: 0 6px 20px rgba(29, 27, 32, 0.12);
+  --orbit-font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Roboto", "Segoe UI", sans-serif;
+  --orbit-font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Roboto", "Segoe UI", sans-serif;
+  --orbit-text-xs: 0.75rem;
+  --orbit-text-sm: 0.875rem;
+  --orbit-text-md: 1rem;
+  --orbit-text-lg: 1.25rem;
+  --orbit-text-xl: clamp(1.75rem, 5vw, 2.25rem);
+  --orbit-font-scale: 1;
+  --orbit-line-body: 1.5;
+  --orbit-line-tight: 1.2;
+  --orbit-control-height: 48px;
+  --orbit-icon-size: 24px;
+  --orbit-content-max-width: 800px;
+  --orbit-motion-standard: 220ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --orbit-primary: #6f8cff;
+    --orbit-primary-hover: #86a6ff;
+    --orbit-primary-contrast: #101a36;
+    --orbit-secondary: #b8c4df;
+    --orbit-accent: #9b87e8;
+    --orbit-success: #30d158;
+    --orbit-warning: #ffd60a;
+    --orbit-danger: #ff6961;
+    --orbit-bg-base: #100e17;
+    --orbit-neon-blue: #5f8dff;
+    --orbit-chrome-accent: #5f8dff;
+    --orbit-button-start: #5f8dff;
+    --orbit-segment-checked: #5f8dff;
+    --orbit-bg-effect: radial-gradient(ellipse 62% 38% at 16% 108%, rgba(95, 141, 255, 0.22), transparent 72%), radial-gradient(ellipse 48% 34% at 82% 108%, rgba(155, 135, 232, 0.12), transparent 72%), linear-gradient(180deg, #0d111b 0%, #121a2b 68%, #172541 100%);
+    --orbit-bg-surface: #171d2b;
+    --orbit-bg-surface-variant: #222d42;
+    --orbit-chrome-bg: rgba(19, 29, 48, 0.92);
+    --orbit-chrome-border: rgba(95, 141, 255, 0.32);
+    --orbit-chrome-gradient: linear-gradient(135deg, rgba(111, 140, 255, 0.24), rgba(155, 135, 232, 0.16));
+    --orbit-topic-card-bg: #1b263e;
+    --orbit-topic-card-border: rgba(111, 140, 255, 0.24);
+    --orbit-text-main: #edf2ff;
+    --orbit-text-muted: #b5c0d8;
+    --orbit-divider: rgba(237, 242, 255, 0.12);
+    --orbit-card-bg: rgba(23, 29, 43, 0.94);
+    --orbit-card-border: rgba(181, 198, 232, 0.12);
+    --orbit-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.32), 0 1px 2px rgba(0, 0, 0, 0.24);
+    --orbit-shadow-2: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --orbit-primary: #6d52c7;
+  --orbit-primary-hover: #5d44b4;
+  --orbit-primary-contrast: #ffffff;
+  --orbit-secondary: #666276;
+  --orbit-accent: #7657c9;
+  --orbit-neon-blue: #6e8fd9;
+  --orbit-chrome-accent: #6d52c7;
+  --orbit-button-start: #6d52c7;
+  --orbit-segment-checked: #6d52c7;
+  --orbit-bg-base: #f8f7fb;
+  --orbit-bg-effect: radial-gradient(ellipse 68% 40% at 50% 108%, rgba(154, 124, 242, 0.1), transparent 72%), #f8f7fb;
+  --orbit-bg-surface: #ffffff;
+  --orbit-bg-surface-variant: #f0edf7;
+  --orbit-chrome-bg: rgba(255, 255, 255, 0.84);
+  --orbit-chrome-border: rgba(109, 82, 199, 0.14);
+  --orbit-chrome-gradient: var(--orbit-chrome-bg);
+  --orbit-topic-card-bg: #f1edfc;
+  --orbit-topic-card-border: rgba(109, 82, 199, 0.18);
+  --orbit-text-main: #272331;
+  --orbit-text-muted: #756f80;
+  --orbit-divider: rgba(33, 29, 43, 0.12);
+  --orbit-card-bg: rgba(255, 255, 255, 0.94);
+  --orbit-card-border: rgba(39, 35, 49, 0.09);
+  --orbit-shadow-1: 0 1px 3px rgba(33, 29, 43, 0.1), 0 1px 2px rgba(33, 29, 43, 0.06);
+  --orbit-shadow-2: 0 6px 20px rgba(33, 29, 43, 0.1);
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --orbit-primary: #6f8cff;
+  --orbit-primary-hover: #86a6ff;
+  --orbit-primary-contrast: #101a36;
+  --orbit-secondary: #b8c4df;
+  --orbit-accent: #9b87e8;
+  --orbit-neon-blue: #5f8dff;
+  --orbit-chrome-accent: #5f8dff;
+  --orbit-button-start: #5f8dff;
+  --orbit-segment-checked: #5f8dff;
+  --orbit-success: #30d158;
+  --orbit-warning: #ffd60a;
+  --orbit-danger: #ff6961;
+  --orbit-bg-base: #100e17;
+  --orbit-bg-effect: radial-gradient(ellipse 62% 38% at 16% 108%, rgba(95, 141, 255, 0.22), transparent 72%), radial-gradient(ellipse 48% 34% at 82% 108%, rgba(155, 135, 232, 0.12), transparent 72%), linear-gradient(180deg, #0d111b 0%, #121a2b 68%, #172541 100%);
+  --orbit-bg-surface: #171d2b;
+  --orbit-bg-surface-variant: #222d42;
+  --orbit-chrome-bg: rgba(19, 29, 48, 0.92);
+  --orbit-chrome-border: rgba(95, 141, 255, 0.24);
+  --orbit-chrome-gradient: linear-gradient(135deg, rgba(111, 140, 255, 0.24), rgba(155, 135, 232, 0.16));
+  --orbit-topic-card-bg: #1b263e;
+  --orbit-topic-card-border: rgba(111, 140, 255, 0.24);
+  --orbit-text-main: #edf2ff;
+  --orbit-text-muted: #b5c0d8;
+  --orbit-divider: rgba(237, 242, 255, 0.12);
+  --orbit-card-bg: rgba(23, 29, 43, 0.94);
+  --orbit-card-border: rgba(181, 198, 232, 0.12);
+}
+
+html { font-size: calc(16px * var(--orbit-font-scale)); }

@@ -6,6 +6,9 @@ export interface TopicsState {
   topics: Topic[];
 }
 
+/**
+ * 
+ */
 export const initialState: TopicsState = {
   topics: [
     {
@@ -21,6 +24,9 @@ export const initialState: TopicsState = {
   ]
 };
 
+/**
+ * 
+ */
 export const topicsReducer = createReducer(
   initialState,
   on(TopicsActions.addTopic, (state, { topic }) => ({

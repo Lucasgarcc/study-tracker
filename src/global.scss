@@ -38,19 +38,19 @@
 
 
 :root {
-    --ion-background-color: #090a0f !important;
-    --ion-background-color-rgb: 9, 10, 15 !important;
+    --ion-background-color: var(--orbit-bg-effect) !important;
+    --ion-background-color-rgb: 13, 14, 20 !important;
     
-    --ion-text-color: #f3f4f6 !important;
-    --ion-text-color-rgb: 243, 244, 246 !important;
+    --ion-text-color: var(--orbit-text-main) !important;
+    --ion-text-color-rgb: 27, 33, 30 !important;
 
     /* Cores principais com gradientes e tons neon */
-    --ion-color-primary:  #733bf6;
-    --ion-color-primary-rgb: 59, 130, 246;
+    --ion-color-primary:  var(--orbit-primary);
+    --ion-color-primary-rgb: 109, 82, 199;
     --ion-color-primary-contrast: #ffffff;
     --ion-color-primary-contrast-rgb: 255, 255, 255;
-    --ion-color-primary-shade: #8633d9;
-    --ion-color-primary-tint: #a34ef7;
+    --ion-color-primary-shade: #5d44b4;
+    --ion-color-primary-tint: #8a72dc;
 
     --ion-color-step-50: #12141c;
     --ion-color-step-100: #1a1d29;
@@ -58,20 +58,45 @@
     --ion-color-step-200: #2a2f42;
 
     /* Estilização padrão para toolbars e headers */
-    --ion-toolbar-background: #090a0f !important;
-    --ion-toolbar-color: #f3f4f6 !important;
-    --ion-toolbar-border-color: rgba(255, 255, 255, 0.08) !important;
+    --ion-toolbar-background: var(--orbit-chrome-bg) !important;
+    --ion-toolbar-color: var(--orbit-text-main) !important;
+    --ion-toolbar-border-color: transparent !important;
 
     /* Estilização da barra de abas inferior (Tabs) */
-    --ion-tab-bar-background: #0c0e14 !important;
-    --ion-tab-bar-border-color: rgba(255, 255, 255, 0.06) !important;
+    --ion-tab-bar-background: var(--orbit-chrome-bg) !important;
+    --ion-tab-bar-border-color: transparent !important;
     --ion-tab-bar-color: #6b7280;
-    --ion-tab-bar-color-selected: #3b82f6;
+    --ion-tab-bar-color-selected: #7657c9;
 }
 
+
 /* Corpo da aplicação com fundo escuro futurista */
+ion-header {
+  padding: 10px 12px 0;
+  background: transparent;
+}
+
+ion-header ion-toolbar {
+  --border-width: 0;
+  --border-color: transparent;
+  --background: var(--orbit-chrome-gradient);
+  --padding-start: 16px;
+  --padding-end: 16px;
+  min-height: 56px;
+  border: 1px solid var(--orbit-chrome-border);
+  border-radius: var(--orbit-radius-lg);
+  box-shadow: 0 8px 24px rgba(33, 26, 54, 0.08);
+}
+
+ion-title {
+  font-family: var(--orbit-font-display);
+  font-size: var(--orbit-text-md);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
 ion-content {
-  --background: var(--orbit-bg-base) !important;
+  --background: var(--orbit-bg-effect) !important;
   color: var(--orbit-text-main);
 }
 
@@ -81,31 +106,64 @@ ion-content {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--orbit-card-border);
   border-radius: 16px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  transition: all 0.3s ease;
+  box-shadow: var(--orbit-shadow-2);
+  transition: transform var(--orbit-motion-standard), border-color var(--orbit-motion-standard), box-shadow var(--orbit-motion-standard);
 }
 
 .orbit-card:hover {
-  border-color: rgba(59, 130, 246, 0.4);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+  border-color: rgba(118, 87, 201, 0.4);
+  box-shadow: 0 0 20px rgba(118, 87, 201, 0.15);
 }
 
 /* Customização dos ion-item e ion-input para o padrão Orbit */
 ion-item.orbit-input-item {
-  --background: rgba(255, 255, 255, 0.03);
+  --background: var(--orbit-bg-surface-variant);
   --border-radius: 12px;
   border: 1px solid var(--orbit-card-border);
   border-radius: 12px;
   margin-bottom: 12px;
-  --highlight-color-focused: #733bf6;
+  --highlight-color-focused: var(--orbit-accent);
 }
 
 ion-item.orbit-input-item:focus-within {
-  border-color:  #733bf6;
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+  border-color: var(--orbit-accent);
+  box-shadow: 0 0 10px rgba(118, 87, 201, 0.2);
 }
 
 ion-input, ion-select {
-  --color: #ffffff !important;
-  --placeholder-color: #6b7280 !important;
+  --color: var(--orbit-text-main) !important;
+  --placeholder-color: var(--orbit-text-muted) !important;
+}
+
+/* Tokens globais utilizados pela tela de preferências e pelos cards. */
+:root {
+  --ion-background-color: var(--orbit-bg-effect);
+  --ion-text-color: var(--orbit-text-main);
+  --ion-color-primary: var(--orbit-primary);
+  --ion-color-primary-contrast: var(--orbit-primary-contrast);
+  --ion-toolbar-background: var(--orbit-chrome-bg);
+  --ion-toolbar-color: var(--orbit-text-main);
+  --ion-tab-bar-background: var(--orbit-chrome-bg);
+  --ion-tab-bar-color-selected: var(--orbit-accent);
+  --ion-font-family: var(--orbit-font-family);
+}
+
+html, body {
+  font-family: var(--orbit-font-family);
+  color: var(--orbit-text-main);
+  background: var(--orbit-bg-base);
+}
+
+ion-button {
+  --border-radius: var(--orbit-radius-md);
+  min-height: var(--orbit-control-height);
+  font-weight: 600;
+  text-transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }
