@@ -1,0 +1,25 @@
+<ion-header [translucent]="true" class="ion-no-border">
+    <ion-toolbar>
+      <ion-title class="ion-padding-start">{{ task.title }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content [fullscreen]="true" class="ion-padding" style="--background: var(--orbit-bg-effect);">
+    <ion-header collapse="condense" class="ion-no-border">
+      <ion-toolbar>
+        <ion-title size="large">{{ task.title}}</ion-title>
+      </ion-toolbar>
+    </ion-header>
+  
+    <!-- Container Geral com espaçamento Apple (max-width e respiros) -->
+    <ion-item lines="none">
+        <ion-checkbox
+          slot="start"
+          [checked]="task.completed"
+          [attr.aria-label]="'Concluir tarefa: ' + task.title">
+        </ion-checkbox>
+      
+        <ion-label>{{ task.title }}</ion-label>
+      </ion-item>
+  </ion-content>
+  
