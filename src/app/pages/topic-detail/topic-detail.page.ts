@@ -13,18 +13,24 @@ import { map } from 'rxjs/operators';
   templateUrl: './topic-detail.page.html',
   styleUrls: ['./topic-detail.page.scss'],
   standalone: true, 
-  imports: [CommonModule, FormsModule, IonicModule] // <-- Importa o que precisa aqui dentro
+  imports: [CommonModule, FormsModule, IonicModule]
 })
 export class TopicDetailPage implements OnInit {
-  topicId!: string;
-  private route = inject(ActivatedRoute);
-  private store = inject(Store);
+    topicId!: string;
+    private route = inject(ActivatedRoute);
+    private store = inject(Store);
 
-  topic$ = this.store.select(selectAllTopics).pipe(
-    map(topics => topics.find(t => t.id === this.topicId))
-  );
+   /**
+    *  select the topic from the store based on the topicId. The topic$ observable will emit the topic object whenever it changes in the store.
+    */
+    topic$ = this.store.select(selectAllTopics).pipe(
+        map(topics => topics.find(t => t.id === this.topicId))
+    );
 
-  ngOnInit() {
-    this.topicId = this.route.snapshot.paramMap.get('id')!;
-  }
+    /**
+     *  route snapshot is used to get the topicId from the route parameters when the component is initialized. The topicId is then used to select the topic from the store.
+     */
+    ngOnInit() {
+        this.topicId = this.route.snapshot.paramMap.get('id')!;
+    }
 }
