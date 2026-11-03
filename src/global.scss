@@ -59,7 +59,7 @@
 
     /* Estilização padrão para toolbars e headers */
     --ion-toolbar-background: var(--orbit-chrome-bg) !important;
-    --ion-toolbar-color: var(--orbit-text-main) !important;
+     --ion-toolbar-color: var(--orbit-chrome-text) !important;
     --ion-toolbar-border-color: transparent !important;
 
     /* Estilização da barra de abas inferior (Tabs) */
@@ -69,70 +69,243 @@
     --ion-tab-bar-color-selected: #7657c9;
 }
 
+a {
+    color: var(--orbit-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: var(--orbit-primary-contrast);
+    }
+}
+
 
 /* Corpo da aplicação com fundo escuro futurista */
 ion-header {
-  padding: 10px 12px 0;
-  background: transparent;
+    padding: 10px 12px 0;
+    background: transparent;
 }
 
 ion-header ion-toolbar {
-  --border-width: 0;
-  --border-color: transparent;
-  --background: var(--orbit-chrome-gradient);
-  --padding-start: 16px;
-  --padding-end: 16px;
-  min-height: 56px;
-  border: 1px solid var(--orbit-chrome-border);
-  border-radius: var(--orbit-radius-lg);
-  box-shadow: 0 8px 24px rgba(33, 26, 54, 0.08);
+    --border-width: 0;
+    --border-color: transparent;
+    --background: var(--orbit-chrome-gradient) !important;
+    --color: var(--orbit-chrome-text);
+    --opacity: 1;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    min-height: 56px;
+    border: 1px solid var(--orbit-chrome-border);
+    border-radius: var(--orbit-radius-lg);
+    box-shadow: 0 8px 24px rgba(33, 26, 54, 0.08);
 }
 
 ion-title {
-  font-family: var(--orbit-font-display);
-  font-size: var(--orbit-text-md);
-  font-weight: 700;
-  letter-spacing: -0.02em;
+    font-family: var(--orbit-font-display);
+    font-size: var(--orbit-text-md);
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 ion-content {
-  --background: var(--orbit-bg-effect) !important;
-  color: var(--orbit-text-main);
+    --background: var(--orbit-bg-effect) !important;
+    color: var(--orbit-text-main);
 }
 
+ion-content::part(scroll) {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+ion-content::part(scroll)::-webkit-scrollbar {
+    display: none;
+}
+
+ion-tabs::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: calc(20px + env(safe-area-inset-bottom, 0px));
+    background: var(--orbit-bg-effect);
+    pointer-events: none;
+    z-index: 9;
+}
+
+.clip-path-definitions {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+ion-card,
 .orbit-card {
-  background: var(--orbit-card-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--orbit-card-border);
-  border-radius: 16px;
-  box-shadow: var(--orbit-shadow-2);
-  transition: transform var(--orbit-motion-standard), border-color var(--orbit-motion-standard), box-shadow var(--orbit-motion-standard);
+    background: var(--orbit-card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--orbit-card-border);
+    border-radius: 16px;
+    box-shadow: var(--orbit-shadow-2);
+    transition: transform var(--orbit-motion-standard), border-color var(--orbit-motion-standard), box-shadow var(--orbit-motion-standard);
 }
 
 .orbit-card:hover {
-  border-color: rgba(118, 87, 201, 0.4);
-  box-shadow: 0 0 20px rgba(118, 87, 201, 0.15);
+    border-color: rgba(118, 87, 201, 0.4);
+    box-shadow: 0 0 20px rgba(118, 87, 201, 0.15);
 }
 
 /* Customização dos ion-item e ion-input para o padrão Orbit */
 ion-item.orbit-input-item {
-  --background: var(--orbit-bg-surface-variant);
-  --border-radius: 12px;
-  border: 1px solid var(--orbit-card-border);
-  border-radius: 12px;
-  margin-bottom: 12px;
-  --highlight-color-focused: var(--orbit-accent);
+    --background: var(--orbit-bg-surface-variant);
+    --border-radius: 12px;
+    border: 1px solid var(--orbit-card-border);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    --highlight-color-focused: var(--orbit-accent);
 }
 
 ion-item.orbit-input-item:focus-within {
-  border-color: var(--orbit-accent);
-  box-shadow: 0 0 10px rgba(118, 87, 201, 0.2);
+    border-color: var(--orbit-accent);
+    box-shadow: 0 0 10px rgba(118, 87, 201, 0.2);
 }
 
 ion-input, ion-select {
-  --color: var(--orbit-text-main) !important;
-  --placeholder-color: var(--orbit-text-muted) !important;
+    --color: var(--orbit-text-main) !important;
+    --placeholder-color: var(--orbit-text-muted) !important;
+}
+
+/* Campos de selecao e opcoes renderizadas nos overlays do Ionic. */
+ion-select {
+    border: 1px solid var(--orbit-card-border);
+    border-radius: var(--orbit-radius-sm);
+    padding-inline: var(--orbit-space-3);
+    --background: transparent !important;
+    transition: border-color var(--orbit-motion-fast);
+}
+
+ion-select:focus-within {
+    border-color: var(--orbit-accent);
+}
+
+.settings-page ion-select.font-size-select {
+    --background: var(--orbit-bg-surface);
+    --color: var(--orbit-text-main);
+    --placeholder-color: var(--orbit-text-muted);
+    color: var(--orbit-text-main);
+
+    &::part(text),
+    &::part(icon) {
+        color: var(--orbit-text-main);
+    }
+}
+
+@media (hover: hover) {
+    ion-select:hover {
+        border-color: var(--orbit-accent);
+    }
+}
+
+ion-popover.select-popover::part(content),
+ion-alert.select-alert .alert-wrapper {
+    border: 1px solid var(--orbit-card-border);
+}
+
+ion-select-popover ion-item,
+ion-alert.select-alert .alert-radio-button,
+ion-alert.select-alert .alert-checkbox-button {
+    width: auto;
+    margin: var(--orbit-space-2);
+    border: 1px solid var(--orbit-card-border);
+    border-radius: var(--orbit-radius-sm);
+}
+
+/* O popover e montado fora da pagina e recebe estilos globais por classe. */
+ion-popover.orbit-category-popover {
+    --background: var(--orbit-bg-surface);
+    --max-width: calc(100vw - 32px);
+    --box-shadow: var(--orbit-shadow-2);
+    --backdrop-opacity: 0.3;
+
+    &::part(content) {
+        border-radius: var(--orbit-radius-lg);
+        color: var(--orbit-text-main);
+    }
+
+    ion-list {
+        padding: var(--orbit-space-2);
+        background: var(--orbit-bg-surface);
+    }
+
+    ion-list-header {
+        min-height: 44px;
+        padding-inline: var(--orbit-space-3);
+        color: var(--orbit-text-muted);
+        font-size: var(--orbit-text-sm);
+        font-weight: 600;
+    }
+
+    ion-item {
+        --background: var(--orbit-bg-surface);
+        --color: var(--orbit-text-main);
+        --min-height: 48px;
+        --inner-border-width: 0;
+        --padding-start: var(--orbit-space-3);
+        --inner-padding-end: var(--orbit-space-3);
+        margin: var(--orbit-space-2) 0;
+        border-radius: var(--orbit-radius-md);
+        font-size: var(--orbit-text-md);
+
+        &.item-radio-checked {
+        --background: var(--orbit-bg-surface-variant);
+        border-color: var(--orbit-accent);
+        }
+
+        &:focus-within {
+        outline: 2px solid var(--orbit-accent);
+        outline-offset: 1px;
+        }
+    }
+
+    ion-radio {
+        --color: var(--orbit-text-muted);
+        --color-checked: var(--orbit-accent);
+        min-height: 48px;
+    }
+}
+
+ion-popover.orbit-font-size-popover {
+    --background: var(--orbit-bg-surface);
+    --color: var(--orbit-text-main);
+    --box-shadow: var(--orbit-shadow-2);
+
+    &::part(content) {
+        background: var(--orbit-bg-surface);
+        border: 1px solid var(--orbit-card-border);
+        border-radius: var(--orbit-radius-lg);
+        color: var(--orbit-text-main);
+    }
+
+    ion-list {
+        padding: var(--orbit-space-2);
+        background: var(--orbit-bg-surface);
+    }
+
+    ion-item {
+        --background: var(--orbit-bg-surface);
+        --color: var(--orbit-text-main);
+        --background-focused: var(--orbit-bg-surface-variant);
+        --background-hover: var(--orbit-bg-surface-variant);
+        --background-activated: var(--orbit-bg-surface-variant);
+        --min-height: 48px;
+        --inner-border-width: 0;
+        margin: var(--orbit-space-1) 0;
+        border-radius: var(--orbit-radius-md);
+
+        &.item-radio-checked {
+            --background: var(--orbit-bg-surface-variant);
+            --color: var(--orbit-primary);
+        }
+    }
 }
 
 /* Tokens globais utilizados pela tela de preferências e pelos cards. */
@@ -142,7 +315,7 @@ ion-input, ion-select {
   --ion-color-primary: var(--orbit-primary);
   --ion-color-primary-contrast: var(--orbit-primary-contrast);
   --ion-toolbar-background: var(--orbit-chrome-bg);
-  --ion-toolbar-color: var(--orbit-text-main);
+  --ion-toolbar-color: var(--orbit-chrome-text);
   --ion-tab-bar-background: var(--orbit-chrome-bg);
   --ion-tab-bar-color-selected: var(--orbit-accent);
   --ion-font-family: var(--orbit-font-family);
@@ -156,9 +329,18 @@ html, body {
 
 ion-button {
   --border-radius: var(--orbit-radius-md);
+  --ripple-color: transparent;
+  --background-activated: currentColor;
+  --background-activated-opacity: 0.1;
+  --background-hover-opacity: 0.05;
+  --transition: background-color var(--orbit-motion-fast), box-shadow var(--orbit-motion-fast), opacity var(--orbit-motion-fast);
   min-height: var(--orbit-control-height);
   font-weight: 600;
   text-transform: none;
+}
+
+ion-button::part(native) {
+  overflow: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -166,4 +348,46 @@ ion-button {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
+}
+
+@supports (-webkit-touch-callout: none) {
+    .ios-status-bar-backdrop {
+        position: fixed;
+        z-index: 1;
+        inset: 0 0 auto;
+        height: env(safe-area-inset-top, 0px);
+        background: var(--orbit-chrome-gradient);
+        background-size: 100vw 100vh;
+        background-position: top left;
+        background-repeat: no-repeat;
+        opacity: 1;
+        pointer-events: none;
+        transition: opacity 280ms cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    app-root.ios-route-transitioning .ios-status-bar-backdrop {
+        opacity: 0.92;
+    }
+
+    ion-header:not([collapse]) {
+        background: var(--orbit-chrome-gradient);
+        background-size: 100vw 100vh;
+        background-position: top left;
+        background-repeat: no-repeat;
+        padding: 0 0 24px;
+        border-radius: 0 0 var(--orbit-radius-xl + '8px')  var(--orbit-radius-xl + '8px');
+        clip-path: url(#ios-status-header-clip);
+
+        ion-toolbar {
+        --background: transparent !important;
+        --opacity: 1;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        }
+    }
+
+    ion-header.topic-detail-header:not([collapse]) {
+        clip-path: url(#ios-status-header-back-clip);
+    }
 }
