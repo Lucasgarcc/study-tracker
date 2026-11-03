@@ -5,9 +5,8 @@ import { Store } from '@ngrx/store';
 
 import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
 import { selectActiveTopics } from '../../store/topics/topics.selectors';
-import { TopicDetailPage } from '../topic-detail/topic-detail.page';
 
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 @Component({
     selector: 'app-home',
@@ -15,7 +14,6 @@ import { FormsModule } from '@angular/forms';
     styleUrls: ['home.page.scss'],
     standalone: true,
     imports: [
-        RouterLink,
         CommonModule,
         FormsModule,
         CommonModule,
@@ -54,7 +52,7 @@ export class HomePage {
      * @param id The ID of the topic to navigate to.
      */
     openTopicDetail(id: string) {
-        this.router.navigate([TopicDetailPage, id]);
+        this.router.navigate(['/topic-detail', id]);
     }
 
 }

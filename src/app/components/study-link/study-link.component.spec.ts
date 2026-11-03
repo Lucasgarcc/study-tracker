@@ -1,24 +1,18 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StudyLinkComponent } from './study-link.component';
 
 describe('StudyLinkComponent', () => {
-  let component: StudyLinkComponent;
   let fixture: ComponentFixture<StudyLinkComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ StudyLinkComponent ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
-
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({ imports: [StudyLinkComponent] }).compileComponents();
     fixture = TestBed.createComponent(StudyLinkComponent);
-    component = fixture.componentInstance;
+
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
+
 });

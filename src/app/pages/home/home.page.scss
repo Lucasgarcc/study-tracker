@@ -42,6 +42,10 @@
 
 /* Card Gadget com Glassmorphism e Efeito Spotlight */
 .orbit-gadget-card {
+    &:focus-visible {
+        outline: 2px solid var(--orbit-accent);
+        outline-offset: 3px;
+    }
     background: var(--orbit-card-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);

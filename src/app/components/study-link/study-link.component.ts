@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-study-link',
   templateUrl: './study-link.component.html',
   styleUrls: ['./study-link.component.scss'],
 })
-export class StudyLinkComponent  implements OnInit {
+export class StudyLinkComponent {
 
     /**
      * 
@@ -15,6 +15,5 @@ export class StudyLinkComponent  implements OnInit {
     /**
      * 
      */
-    ngOnInit() {}
 
 }

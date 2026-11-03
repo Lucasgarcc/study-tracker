@@ -25,13 +25,16 @@
 
     <!-- Mantenha o conteúdo atual do card -->
         <div class="orbit-grid">
-            <a *ngFor="let topic of activeTopics$ | async"
-                [routerLink]="['/topic-detail', topic.id]"
+            <div *ngFor="let topic of activeTopics$ | async"
+                role="link"
+                tabindex="0"
+                (click)="openTopicDetail(topic.id)"
+                (keydown.enter)="openTopicDetail(topic.id)"
                 class="orbit-gadget-card" 
             >
           
-                <div (click)="openTopicDetail(topic.id)">
-                    
+                <div>
+
                     <!-- Ícone / Logo do Tópico com Glow interno -->
                     <div class="gadget-icon-wrapper">
                     <ion-icon [name]="getCategoryIcon(topic.category)" class="gadget-icon"></ion-icon>
@@ -52,7 +55,7 @@
                     </div>
 
                 </div>
-            </a>
+            </div>
         </div>
    
 

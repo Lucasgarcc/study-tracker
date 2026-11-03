@@ -1,24 +1,18 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StudyNoteComponent } from './study-note.component';
 
 describe('StudyNoteComponent', () => {
-  let component: StudyNoteComponent;
   let fixture: ComponentFixture<StudyNoteComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ StudyNoteComponent ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
-
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({ imports: [StudyNoteComponent] }).compileComponents();
     fixture = TestBed.createComponent(StudyNoteComponent);
-    component = fixture.componentInstance;
+
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
+
 });

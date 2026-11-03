@@ -1,32 +1,36 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
-
-import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
-
+import { provideRouter, Router } from '@angular/router';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { StudiesPage } from './studies.page';
+import { selectAllTopics } from '../../store/topics/topics.selectors';
+import { TopicsActions } from '../../store/topics/topics.actions';
 
-declare function describe(description: string, specDefinitions: () => void): void;
-declare function beforeEach(action: () => void | Promise<void>): void;
-declare function it(expectation: string, assertion: () => void): void;
-declare function expect(actual: unknown): { toBeTruthy(): void };
+const topic = { id: '1', title: 'Angular', category: 'Frontend', progress: 0,
+  completedTasks: 0, totalTasks: 0, lastStudied: 'Hoje', badgeColor: 'primary' };
 
-describe('Tab2Page', () => {
-  let component: StudiesPage;
+describe('StudiesPage', () => {
   let fixture: ComponentFixture<StudiesPage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [StudiesPage],
-      imports: [IonicModule.forRoot(), ExploreContainerComponentModule]
+      imports: [StudiesPage],
+      providers: [provideRouter([]), provideMockStore({
+        selectors: [{ selector: selectAllTopics, value: [topic] }]
+      })]
     }).compileComponents();
-
     fixture = TestBed.createComponent(StudiesPage);
-    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
+  });
+
+  it('deletes a topic without opening its details', () => {
+    const navigate = spyOn(TestBed.inject(Router), 'navigate').and.resolveTo(true);
+    const dispatch = spyOn(TestBed.inject(MockStore), 'dispatch');
+    fixture.nativeElement.querySelector('.topic-card ion-button').click();
+    expect(dispatch).toHaveBeenCalledWith(TopicsActions.deleteTopic({ id: topic.id }));
+    expect(navigate).not.toHaveBeenCalled();
   });
 });
-

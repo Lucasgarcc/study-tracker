@@ -8,7 +8,7 @@ import { selectAllTopics } from '../../store/topics/topics.selectors';
 import { TopicsActions } from '../../store/topics/topics.actions';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { TopicDetailPage } from '../topic-detail/topic-detail.page';
+
 
 @Component({
     selector: 'app-studies',

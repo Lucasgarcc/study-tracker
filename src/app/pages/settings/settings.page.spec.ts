@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular';
 import { DOCUMENT } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
 
 import { SettingsPage } from './settings.page';
 
