@@ -8,7 +8,9 @@ export const selectAllTopics = createSelector(
   (state) => state.topics
 );
 
-// Tópicos ativos para a Home (progresso menor que 100%)
+/**
+ * Tópicos ativos para a Home (progresso menor que 100%)
+ */
 export const selectActiveTopics = createSelector(
   selectAllTopics,
   (topics) => topics.filter(t => t.progress < 100)
