@@ -9,21 +9,32 @@ import { AppComponent } from './app.component';
 
 import { StoreModule } from '@ngrx/store';
 import { topicsReducer } from './store/topics/topics.reducer';
+import { provideHttpClient } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
+import { TopicsEffects } from './store/topics/topics.effects';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule,
-    IonicModule.forRoot(), 
-    AppRoutingModule,
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
 
-      StoreModule.forRoot({ 
-      topics: topicsReducer 
-    })
-  ],
-  providers: [{
-     provide: RouteReuseStrategy, 
-     useClass: IonicRouteStrategy
- }],
-  bootstrap: [AppComponent],
+        StoreModule.forRoot({ 
+        topics: topicsReducer 
+        }),
+        EffectsModule.forRoot([
+            TopicsEffects
+        ])
+       
+    ],
+    providers:[ 
+        provideHttpClient(),
+        {
+            provide: RouteReuseStrategy, 
+            useClass: IonicRouteStrategy
+        }
+    ],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

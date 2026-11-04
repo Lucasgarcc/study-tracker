@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Store } from '@ngrx/store';
@@ -8,6 +8,7 @@ import { selectActiveTopics } from '../../store/topics/topics.selectors';
 
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { TopicsActions } from 'src/app/store/topics/topics.actions';
 @Component({
     selector: 'app-home',
     templateUrl: 'home.page.html',
@@ -21,13 +22,18 @@ import { FormsModule } from '@angular/forms';
         ExploreContainerComponentModule
     ]
 })
-export class HomePage {
+export class HomePage implements OnInit  {
 
     constructor() { };
+
     private store = inject(Store)
     private router = inject(Router);
 
-    activeTopics$ = this.store.select(selectActiveTopics);
+    readonly activeTopics$ = this.store.select(selectActiveTopics);
+
+    ngOnInit(): void {
+        this.store.dispatch(TopicsActions.loadTopics());
+    }
 
     /**
      * Calculate the icon name based on the topic category.
@@ -37,15 +43,21 @@ export class HomePage {
     getCategoryIcon(catergory: string): string {
 
         switch (catergory.toLocaleLowerCase()) {
-        case 'frontend': return 'code-slash-outline';
-        case 'architecture': return 'git-network-outline';
-        case 'reactive': return 'flash-outline';
-        case 'backend': return 'server-outline';
-        default: return 'layers-outline';
+
+            case 'frontend': 
+                return 'code-slash-outline';
+            case 'architecture':
+                return 'git-network-outline';
+            case 'reactive':
+                return 'flash-outline';
+            case 'backend': 
+                return 'server-outline';
+            default: 
+                return 'layers-outline';
+    
         }
 
     }
-
 
     /**
      * Navigate to the topic detail page for the given topic ID.
