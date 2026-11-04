@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'
 import { Store } from '@ngrx/store';
@@ -21,16 +21,26 @@ import { Router } from '@angular/router';
         IonicModule
     ]
 })
-export class StudiesPage {
+export class StudiesPage implements OnInit {
 
     constructor(private readonly router: Router,) { }
 
     private store = inject(Store);
-
-    topics$: Observable<Topic[]> = this.store.select(selectAllTopics);
+    topics$ = this.store.select(selectAllTopics);
 
     newTitle: string = '';
-    newCategory: string = 'English';
+    newCategory: string = '';
+    completed: number = 0;
+    totalTasks: number = 0;
+    lastStudied: Date = new Date;
+    badgeColor: string = '';
+
+    /**
+     * 
+     */
+    ngOnInit(): void {
+        this.store.dispatch(TopicsActions.loadTopics());
+    };
 
     /**
      * Add a new topic to the store if the title is not empty.
@@ -45,10 +55,10 @@ export class StudiesPage {
                 topic: {
                     title: this.newTitle,
                     category: this.newCategory,
-                    completedTasks: 0,
-                    totalTasks: 5,
-                    lastStudied: 'Hoje',
-                    badgeColor: 'primary',
+                    completedTasks: this.completed,
+                    totalTasks: this.totalTasks,
+                    lastStudied: this.lastStudied.toISOString(),
+                    badgeColor: this.badgeColor,
                     progress: 0
                 }
             })
@@ -59,19 +69,18 @@ export class StudiesPage {
     };
 
     /**
-         * Navigate to the topic detail page for the given topic ID.
-         * @param id The ID of the topic to navigate to.
-         */
+     * Navigate to the topic detail page for the given topic ID.
+     * @param id The ID of the topic to navigate to.
+     */
         openTopicDetail(id: string): void {
-            this.router.navigate(['/topic-detail', id]);
+        this.router.navigate(['/topic-detail', id]);
     }
     
-
     /**
      * Delete a topic by its ID.
      * @param id 
      */
     deleteTopic(id: string) {
-        this.store.dispatch(TopicsActions.deleteTopic({ id }))
+        this.store.dispatch(TopicsActions.deleteTopic({ id }));
     }
 }

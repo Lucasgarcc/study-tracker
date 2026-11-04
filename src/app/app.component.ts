@@ -12,26 +12,31 @@ import { filter } from 'rxjs';
   standalone: false,
 })
 export class AppComponent {
-  @HostBinding('class.ios-route-transitioning')
-  isIosRouteTransitioning = false;
 
-  constructor(router: Router) {
-    if (Capacitor.getPlatform() === 'ios') {
-      void StatusBar.setOverlaysWebView({ overlay: true })
-        .then(() => StatusBar.setStyle({ style: Style.Light }))
-        .catch(error => console.error('Unable to configure the iOS status bar.', error));
+    @HostBinding('class.ios-route-transitioning')
+    isIosRouteTransitioning = false;
 
-      router.events.pipe(
-        filter(event =>
-          event instanceof NavigationStart ||
-          event instanceof NavigationEnd ||
-          event instanceof NavigationCancel ||
-          event instanceof NavigationError
-        ),
-        takeUntilDestroyed()
-      ).subscribe(event => {
-        this.isIosRouteTransitioning = event instanceof NavigationStart;
-      });
+    /**
+     * 
+     * @param router 
+     */
+    constructor(router: Router) {
+        if (Capacitor.getPlatform() === 'ios') {
+        void StatusBar.setOverlaysWebView({ overlay: true })
+            .then(() => StatusBar.setStyle({ style: Style.Light }))
+            .catch(error => console.error('Unable to configure the iOS status bar.', error));
+
+        router.events.pipe(
+            filter(event =>
+            event instanceof NavigationStart ||
+            event instanceof NavigationEnd ||
+            event instanceof NavigationCancel ||
+            event instanceof NavigationError
+            ),
+            takeUntilDestroyed()
+        ).subscribe(event => {
+            this.isIosRouteTransitioning = event instanceof NavigationStart;
+        });
+        }
     }
-  }
 }
