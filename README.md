@@ -130,6 +130,16 @@ npm start
 
 A aplicação será disponibilizada pelo Angular em `http://localhost:4200/`.
 
+### Simular a API com JSON Server
+
+Para simular a API de tópicos durante o desenvolvimento, execute na raiz do projeto, em outro terminal:
+
+```bash
+npx json-server ./src/db/db.json
+```
+
+Com o servidor rodando, o endpoint `http://localhost:3000/topics` permite listar, adicionar e excluir tópicos. As alterações são salvas em `src/db/db.json`.
+
 ### Build de desenvolvimento
 
 ```bash
